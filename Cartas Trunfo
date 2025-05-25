@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h> // Para a função srand()
+
+// --- Estrutura da Carta ---
+typedef struct {
+    char nome[50];
+    int velocidade;
+    int forca;
+    int inteligencia;
+    // Adicione mais atributos conforme a temática do seu Super Trunfo
+    int trunfo; // 1 se for o Super Trunfo, 0 caso contrário
+} Carta;
