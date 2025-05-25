@@ -12,3 +12,128 @@ typedef struct {
     // Adicione mais atributos conforme a temática do seu Super Trunfo
     int trunfo; // 1 se for o Super Trunfo, 0 caso contrário
 } Carta;
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h> // Para a função srand
+
+// Definindo o número máximo de cartas
+#define MAX_CARTAS 5
+#define MAX_NOME 30
+
+int main() {
+    // Arrays para armazenar os dados das cartas
+    char nomes[MAX_CARTAS][MAX_NOME];
+    int forca[MAX_CARTAS];
+    int velocidade[MAX_CARTAS];
+    int inteligencia[MAX_CARTAS];
+    int energia[MAX_CARTAS]; // Um poder extra!
+
+    // Inicializando as cartas (você pode adicionar mais ou ler de um arquivo)
+    // Carta 0: Capitão Coder
+    strcpy(nomes[0], "Capitao Coder");
+    forca[0] = 80;
+    velocidade[0] = 60;
+    inteligencia[0] = 95;
+    energia[0] = 70;
+
+    // Carta 1: Mulher Binária
+    strcpy(nomes[1], "Mulher Binaria");
+    forca[1] = 75;
+    velocidade[1] = 85;
+    inteligencia[1] = 80;
+    energia[1] = 90;
+
+    // Carta 2: Dr. Bug
+    strcpy(nomes[2], "Dr. Bug");
+    forca[2] = 60;
+    velocidade[2] = 70;
+    inteligencia[2] = 100;
+    energia[2] = 65;
+
+    // Carta 3: Flash Drive
+    strcpy(nomes[3], "Flash Drive");
+    forca[3] = 70;
+    velocidade[3] = 100;
+    inteligencia[3] = 70;
+    energia[3] = 80;
+
+    // Carta 4: Firewall Flamejante
+    strcpy(nomes[4], "Firewall Flamejante");
+    forca[4] = 90;
+    velocidade[4] = 65;
+    inteligencia[4] = 75;
+    energia[4] = 85;
+
+    // --- Lógica básica do jogo ---
+    srand(time(NULL)); // Inicializa o gerador de números aleatórios
+
+    printf("Bem-vindo ao Super Trunfo dos Heróis da Programacao!\n");
+    printf("---------------------------------------------------\n");
+
+    int cartaJogador1, cartaJogador2;
+    int atributoEscolhido;
+
+    // Sorteando as cartas para os jogadores
+    cartaJogador1 = rand() % MAX_CARTAS;
+    do {
+        cartaJogador2 = rand() % MAX_CARTAS;
+    } while (cartaJogador2 == cartaJogador1); // Garante que as cartas sejam diferentes
+
+    printf("Sua carta (Jogador 1):\n");
+    printf("Nome: %s\n", nomes[cartaJogador1]);
+    printf("1. Forca: %d\n", forca[cartaJogador1]);
+    printf("2. Velocidade: %d\n", velocidade[cartaJogador1]);
+    printf("3. Inteligencia: %d\n", inteligencia[cartaJogador1]);
+    printf("4. Energia: %d\n", energia[cartaJogador1]);
+    printf("---------------------------------------------------\n");
+
+    printf("Escolha o atributo para comparar (1-Forca, 2-Velocidade, 3-Inteligencia, 4-Energia): ");
+    scanf("%d", &atributoEscolhido);
+
+    printf("\nCarta do oponente (Jogador 2):\n");
+    printf("Nome: %s\n", nomes[cartaJogador2]);
+    printf("---------------------------------------------------\n");
+
+    int valorJogador1, valorJogador2;
+    char atributoNome[20];
+
+    switch (atributoEscolhido) {
+        case 1:
+            valorJogador1 = forca[cartaJogador1];
+            valorJogador2 = forca[cartaJogador2];
+            strcpy(atributoNome, "Forca");
+            break;
+        case 2:
+            valorJogador1 = velocidade[cartaJogador1];
+            valorJogador2 = velocidade[cartaJogador2];
+            strcpy(atributoNome, "Velocidade");
+            break;
+        case 3:
+            valorJogador1 = inteligencia[cartaJogador1];
+            valorJogador2 = inteligencia[cartaJogador2];
+            strcpy(atributoNome, "Inteligencia");
+            break;
+        case 4:
+            valorJogador1 = energia[cartaJogador1];
+            valorJogador2 = energia[cartaJogador2];
+            strcpy(atributoNome, "Energia");
+            break;
+        default:
+            printf("Atributo invalido! O jogo sera encerrado.\n");
+            return 1;
+    }
+
+    printf("Comparando o atributo '%s':\n", atributoNome);
+    printf("%s: %d vs %s: %d\n", nomes[cartaJogador1], valorJogador1, nomes[cartaJogador2], valorJogador2);
+
+    if (valorJogador1 > valorJogador2) {
+        printf("Parabens! Voce venceu com a carta %s!\n", nomes[cartaJogador1]);
+    } else if (valorJogador1 < valorJogador2) {
+        printf("Que pena! O oponente venceu com a carta %s.\n", nomes[cartaJogador2]);
+    } else {
+        printf("Empate! Ninguem venceu esta rodada.\n");
+    }
+
+    return 0;
+}
